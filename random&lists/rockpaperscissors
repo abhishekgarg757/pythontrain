@@ -1,0 +1,51 @@
+rock = '''
+    _______
+---'   ____)
+      (_____)
+      (_____)
+      (____)
+---.__(___)
+'''
+
+paper = '''
+    _______
+---'   ____)____
+          ______)
+          _______)
+         _______)
+---.__________)
+'''
+
+scissors = '''
+    _______
+---'   ____)____
+          ______)
+       __________)
+      (____)
+---.__(___)
+'''
+
+#Write your code below this line 👇
+
+list1 = [rock, paper, scissors]
+x = input(f"press 0 for rock,1 for paper,2 for scissors\n")
+human = list1[int(x)]
+print(human)
+
+import random
+
+number = random.randint(0,len(list1)-1)
+computer = list1[number]
+print(computer)
+
+if human == rock and computer == scissors:
+  print("you win")
+elif human == scissors and computer == paper:
+  print("you win")
+elif human == paper and computer == rock:
+  print("you win")
+elif human == computer:
+  print("draw")
+else:
+  print("you lose")
+
