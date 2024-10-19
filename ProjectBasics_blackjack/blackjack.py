@@ -1,6 +1,6 @@
 import random
 game_over = False
-while not game_open:
+while not game_over:
     game_start = input("do you want to play blackjack? type  y or n")
     if game_start == "n":
         game_over = True
