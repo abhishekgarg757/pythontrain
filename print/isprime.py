@@ -8,7 +8,7 @@ for i in range(0,101):
     list1.append(i)
 level = input("choose a difficult level : easy or hard\n")
 final_num = random.choice(list1)
-print(final_num)
+#print(final_num)
 def game(attempts):
     for i in range(0,attempts):
         guess = int(input("make a guess\n"))
