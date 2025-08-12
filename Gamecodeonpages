@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Running Up and Down Stairs</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #222;
+    color: white;
+    margin: 0;
+  }
+
+  h1 {
+    margin-top: 20px;
+  }
+
+  #game-container {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    height: 400px;
+    margin: 20px auto;
+    background-color: #333;
+    overflow: hidden;
+    border-radius: 10px;
+  }
+
+  .stair {
+    position: absolute;
+    height: 40px;
+    width: 100%;
+    transition: background-color 0.3s;
+  }
+
+  #runner {
+    position: absolute;
+    font-size: 32px;
+    transition: top 0.3s;
+  }
+
+  #counter {
+    margin-top: 10px;
+    font-size: 24px;
+  }
+
+  button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4cafef;
+    color: white;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<h1>🏃 Running Up and Down Stairs</h1>
+<div id="game-container"></div>
+<div id="counter">Steps: 0</div>
+<button id="moveBtn">Move</button>
+
+<script>
+  const container = document.getElementById("game-container");
+  const counterEl = document.getElementById("counter");
+  const moveBtn = document.getElementById("moveBtn");
+
+  const stairCount = 8;
+  const stairs = [];
+  let currentStep = 0;
+  let goingUp = true;
+  let steps = 0;
+
+  // Create stairs
+  for (let i = 0; i < stairCount; i++) {
+    const stair = document.createElement("div");
+    stair.classList.add("stair");
+    stair.style.bottom = `${i * 40}px`;
+    stair.style.backgroundColor = randomColor();
+    container.appendChild(stair);
+    stairs.push(stair);
+  }
+
+  // Runner
+  const runner = document.createElement("div");
+  runner.id = "runner";
+  runner.textContent = "🏃";
+  runner.style.left = "10px";
+  runner.style.bottom = "0px";
+  container.appendChild(runner);
+
+  function randomColor() {
+    const colors = ["#ff4d4d", "#4dff4d", "#4d4dff", "#ffff4d", "#ff4dff"];
+    return colors[Math.floor(Math.random() * colors.length)];
+  }
+
+  function moveRunner() {
+    if (goingUp) {
+      currentStep++;
+      if (currentStep >= stairCount - 1) goingUp = false;
+    } else {
+      currentStep--;
+      if (currentStep <= 0) goingUp = true;
+    }
+
+    runner.style.bottom = `${currentStep * 40}px`;
+
+    // Change stair color
+    stairs[currentStep].style.backgroundColor = randomColor();
+
+    // Increase step counter
+    steps++;
+    counterEl.textContent = `Steps: ${steps}`;
+  }
+
+  moveBtn.addEventListener("click", moveRunner);
+</script>
+
+</body>
+</html>
